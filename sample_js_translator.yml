@@ -9,9 +9,8 @@ configuration:
     # Extensions to watch
     - .jsx
     - .js
-  directive:
-    # Directive to watch
-    - tr
+  # Directive to watch
+  directive: tr
   output:
     # Output path
     path: test.html

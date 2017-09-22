@@ -64,7 +64,8 @@ def prepare_translation(args):
     files = sum((list_files_to_translate(path, extensions) for path in paths_to_analyze), [])
     output_map = defaultdict(list)
 
-    rgx = re.compile(ur'{0}\((?:\'(.*?)\'|\"(.*?)\")\)'.format(directive), flags=re.MULTILINE)
+    rgx_val = ur'{0}\((?:\'(.*?)\'|\"(.*?)\")'.format(directive)
+    rgx = re.compile(rgx_val, flags=re.MULTILINE)
     for filename in files:
         with open(filename, mode="rt") as handle:
             content = handle.read()
