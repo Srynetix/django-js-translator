@@ -1,0 +1,26 @@
+##########################################
+# Django JS Translator configuration file
+
+configuration:
+  paths:
+    # Paths to watch
+    - .
+  extensions:
+    # Extensions to watch
+    - .jsx
+    - .js
+  directive:
+    # Directive to watch
+    - tr
+  output:
+    # Output path
+    path: test.html
+    # Output body
+    body: |
+      {{% load i18n %}}
+
+      <script type="text/javascript">
+      django.translate.defineTranslations({{
+      {0}
+      }});
+      </script>
