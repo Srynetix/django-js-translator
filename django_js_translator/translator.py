@@ -21,8 +21,9 @@ def list_files_to_translate(path, extensions):
     result = []
     for root, _, files in os.walk(path):
         for filename in files:
-            if filename.endswith(".js") or filename.endswith(".jsx") or filename.endswith(".html"):
-                result.append(os.path.join(root, filename))
+            for extension in extensions:
+                if filename.endswith(extension):
+                    result.append(os.path.join(root, filename))
 
     return result
 
