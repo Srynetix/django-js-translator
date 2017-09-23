@@ -34,6 +34,7 @@ This sample configuration will:
   - and output a `test.html` file,
   - wrapping the translation in a `django.translate.defineTranslations` function call.  
 
+
 ```yaml
 ##########################################
 # Django JS Translator configuration file
@@ -61,7 +62,7 @@ configuration:
     # Output path
     path: test.html
 
-    # Output body
+    # Output body
     body: |
       {{% load i18n %}}
 
