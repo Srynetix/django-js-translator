@@ -2,18 +2,28 @@
 # Django JS Translator configuration file
 
 configuration:
+
+  # Paths to watch
   paths:
-    # Paths to watch
-    - .
+    - ./sample_files
+
+  # Activate debug mode: show the origin and position of the text to translate
+  debug: True
+
+  # Extensions to watch
   extensions:
-    # Extensions to watch
     - .jsx
     - .js
-  # Directive to watch
+
+  # Translation directive to search
   directive: tr
+
+  # Output configuration
   output:
+
     # Output path
     path: test.html
+
     # Output body
     body: |
       {{% load i18n %}}
