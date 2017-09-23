@@ -26,6 +26,7 @@ You can configure the translator for your project using a YAML configuration fil
 A sample file is included in the project.  
 
 This sample configuration will:
+
   - detect **.js** and **.jsx** files,
   - in the `./sample_files` folder,
   - show the position and origin of each translation because the `debug mode` is set,
@@ -60,7 +61,7 @@ configuration:
     # Output path
     path: test.html
 
-    #Â Output body
+    # Output body
     body: |
       {{% load i18n %}}
 
