@@ -1,6 +1,6 @@
 """Translate front-end code using a custom directive."""
 
-from __future__ import print_function
+from __future__ import print_function, unicode_literals
 
 import re
 import os
@@ -10,12 +10,13 @@ from collections import defaultdict
 from django_js_translator.config_loader import config_load
 
 
-def list_files_to_translate(path, extensions):
+def list_files_to_translate(path, extensions, ignore_files):
     """
     List files to translate from path.
 
-    :param path         Path (str)
-    :param extensions   Extensions to lookup (iterable)
+    :param path:            Path (str)
+    :param extensions:      Extensions to lookup (iterable)
+    :param ignore_files:    Ignore files (iterable)
     :return List of files (iterable)
     """
     result = []
@@ -23,7 +24,9 @@ def list_files_to_translate(path, extensions):
         for filename in files:
             for extension in extensions:
                 if filename.endswith(extension):
-                    result.append(os.path.join(root, filename))
+                    full_path = os.path.normpath(os.path.join(root, filename))
+                    if full_path not in ignore_files:
+                        result.append(full_path)
 
     return result
 
@@ -86,12 +89,14 @@ def prepare_translation(args):
     output_path = translation_config['configuration']['output']['path']
     output_body = translation_config['configuration']['output']['body']
     extensions = translation_config['configuration'].get('extensions', ['.js, .jsx'])
+    ignore_files = translation_config['configuration'].get('ignore', [])
     debug_mode = translation_config['configuration'].get('debug', False)
 
-    files = sum((list_files_to_translate(path, extensions) for path in paths_to_analyze), [])
+    ignore_files = [os.path.normpath(p) for p in ignore_files]
+    files = sum((list_files_to_translate(path, extensions, ignore_files) for path in paths_to_analyze), [])
     output_map = defaultdict(list)
 
-    rgx_val = ur'{0}\((?:\'(.*?)\'|\"(.*?)\")'.format(directive)
+    rgx_val = r'{0}\((?:\'(.*?)\'|\"(.*?)\")'.format(directive)
     rgx = re.compile(rgx_val, flags=re.MULTILINE)
     for filename in files:
         with open(filename, mode="rt") as handle:
