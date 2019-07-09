@@ -8,7 +8,7 @@ setup(
     version=__version__,
     description='Translate JS strings for Django',
     url='',
-    author='SharingCloud',
+    author='Denis BOURGE',
     author_email='',
     license='MIT',
     packages=['django_js_translator'],
