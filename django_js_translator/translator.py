@@ -102,6 +102,8 @@ def prepare_translation(args):
             content = handle.read()
             for match in re.finditer(rgx, content):
                 target = match.groups()[0]
+                if target is None:
+                    continue
                 position = match.span()
                 output_map[target].append((filename, position))
 
