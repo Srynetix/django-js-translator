@@ -1,6 +1,8 @@
 Django JS Translator
 ====================
 
+[![CircleCI](https://circleci.com/gh/Srynetix/django-js-translator.svg?style=svg)](https://circleci.com/gh/Srynetix/django-js-translator)
+
 Easily translate your front-end code in your Django project !  
 
 This tool outputs an HTML file, using the output body you need, so you can pipe the translation result into a translation helper.
