@@ -1,22 +1,26 @@
 """Shell."""
 
 import argparse
-import textwrap
 import sys
+import textwrap
 
-from django_js_translator.version import __version__
 from django_js_translator.translator import prepare_translation
+from django_js_translator.version import __version__
 
 
 def entry_point():
     """Main entry-point function."""
-    description = textwrap.dedent("""
+    description = textwrap.dedent(
+        """
         django-js-translator {0}
         Prepare translation files for JS.
-    """.format(__version__))
+    """.format(
+            __version__
+        )
+    )
 
     parser = argparse.ArgumentParser(description=description, formatter_class=argparse.RawTextHelpFormatter)
-    parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + __version__)
+    parser.add_argument("-v", "--version", action="version", version="%(prog)s " + __version__)
 
     parser.add_argument("config_path", help="configuration file path")
     parser.add_argument("--dry-run", action="store_true", help="only print output")

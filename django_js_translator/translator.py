@@ -2,10 +2,9 @@
 
 from __future__ import print_function, unicode_literals
 
-import re
-import os
-
 from collections import defaultdict
+import os
+import re
 
 from django_js_translator.config_loader import config_load
 
@@ -51,12 +50,12 @@ def generate_translation_output(output_map, debug_mode=False):
                 filename, position = origin
                 output += "  // {0}:{1}\n".format(filename, position)
 
-        output += "  \"{0}\": \"{{% trans \"{0}\" %}}\"".format(k)
+        output += '  "{0}": "{{% trans "{0}" %}}"'.format(k)
 
         if i != keys_len - 1:
-            output += ',\n'
+            output += ",\n"
             if debug_mode:
-                output += '\n'
+                output += "\n"
 
     return output
 
@@ -84,19 +83,19 @@ def prepare_translation(args):
     translation_config = config_load(args.config_path)
     dry_run = args.dry_run
 
-    paths_to_analyze = translation_config['configuration']['paths']
-    directive = translation_config['configuration']['directive']
-    output_path = translation_config['configuration']['output']['path']
-    output_body = translation_config['configuration']['output']['body']
-    extensions = translation_config['configuration'].get('extensions', ['.js, .jsx'])
-    ignore_files = translation_config['configuration'].get('ignore', [])
-    debug_mode = translation_config['configuration'].get('debug', False)
+    paths_to_analyze = translation_config["configuration"]["paths"]
+    directive = translation_config["configuration"]["directive"]
+    output_path = translation_config["configuration"]["output"]["path"]
+    output_body = translation_config["configuration"]["output"]["body"]
+    extensions = translation_config["configuration"].get("extensions", [".js, .jsx"])
+    ignore_files = translation_config["configuration"].get("ignore", [])
+    debug_mode = translation_config["configuration"].get("debug", False)
 
     ignore_files = [os.path.normpath(p) for p in ignore_files]
     files = sum((list_files_to_translate(path, extensions, ignore_files) for path in paths_to_analyze), [])
     output_map = defaultdict(list)
 
-    rgx_val = r'{0}\((?:\'(.*?)\'|\"(.*?)\")'.format(directive)
+    rgx_val = r"{0}\((?:\'(.*?)\'|\"(.*?)\")".format(directive)
     rgx = re.compile(rgx_val, flags=re.MULTILINE)
     for filename in files:
         with open(filename, mode="rt") as handle:

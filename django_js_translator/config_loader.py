@@ -1,8 +1,9 @@
 """Configuration loader."""
 
-import sys
-import yaml
 import logging
+import sys
+
+import yaml
 
 
 def config_load(path):
@@ -12,7 +13,7 @@ def config_load(path):
     :param path     File path (str)
     """
     try:
-        with open(path, mode='r') as handle:
+        with open(path, mode="r") as handle:
             file_content = handle.read()
 
         loaded_content = yaml.load(file_content)
